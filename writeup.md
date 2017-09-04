@@ -13,22 +13,22 @@ This step consists of:
 
 1) Statistical outlier filtering to clear noise. Number of points was set to 5 in order to make it quicker which also works reasonable well.
 
-![statistical-outlier](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![statistical-outlier](pr2_robot/results/images/statistical_outlier.png)
 
 
 2) Voxel Grid Downsampling to reduce the size of point cloud.
 
-![voxel-downsampling](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![voxel-downsampling](pr2_robot/results/images/voxel_downsampling.png)
 
 
 3) Passthrough filter is selecting the table plane with the objects.
 
-![passthrough-z](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![passthrough-z](pr2_robot/results/images/passthrough_z.png)
 
 
 4) RANSAC plane segmentation finds points of the table so we can select only points related to the objects.
 
-![ransac-objects-selected](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![ransac-objects-selected](pr2_robot/results/images/ransac_objects_selected.png)
 
 
 Then I also applied additional statistical outlier filter to remove the left over noise points.
@@ -39,7 +39,7 @@ This step consists of:
 
 5) Euclidean Clustering that selects the clusters of the objects
 
-![eucledian-clusters](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![euclidean-clusters](pr2_robot/results/images/euclidean_clusters.png)
 
 
 #### 2. Complete Exercise 3 Steps.  Features extracted and SVM trained.  Object recognition implemented.
@@ -48,29 +48,35 @@ From cluster points I extract feature vector as `color_histogram` (from HSV chan
 
 Model files located at `pr2_robot/results/model{1-3}.sav`.
 
-Perplexity matrix for `world1`:
+Perplexity matrix for `world 1`:
 
-![World1-perplexity](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![World1-perplexity](pr2_robot/results/images/model1_900_985.png)
+
+Perplexity matrix for `world 2`:
+
+![World2-perplexity](pr2_robot/results/images/model2_900_965.png)
+
+Perplexity matrix for `world 3`:
+
+![World2-perplexity](pr2_robot/results/images/model3_1500_961.png)
 
 
-Perplexity matrix for `world2`:
 
-![World2-perplexity](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
 
 
 Object recognition for `World 1`:
 
-![World1-recognition](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![World1-recognition](pr2_robot/results/images/world1_recognition.png)
 
 
 Object recognition for `World 2`:
 
-![World2-recognition](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![World2-recognition](pr2_robot/results/images/world2_recognition.png)
 
 
 Object recognition for `World 3`:
 
-![World3-recognition](https://user-images.githubusercontent.com/20687560/28748231-46b5b912-7467-11e7-8778-3095172b7b19.png)
+![World3-recognition](pr2_robot/results/images/world3_recognition.png)
 
 NOTE: On `World 3` the object `glue` is occluded so it wasn't selected and recognized correctly. But considering the sequential pick and place operation it will become fully visible after `book` will be place into the box.
 

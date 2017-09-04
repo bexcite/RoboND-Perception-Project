@@ -75,6 +75,8 @@ def pcl_callback(pcl_msg):
     cloud_filtered = outlier_filter.filter()
 
 
+
+
     # TODO: Voxel Grid Downsampling
 
     # Create a VoxelGrid filter object for our input point cloud
@@ -165,7 +167,7 @@ def pcl_callback(pcl_msg):
     # Finally call the filter function for magic
     cloud_objects = outlier_filter.filter()
 
-    pcl_test_pub.publish(pcl_to_ros(cloud_objects))
+
 
     # TODO: Euclidean Clustering
 
@@ -208,6 +210,8 @@ def pcl_callback(pcl_msg):
 
     # TODO: Convert PCL data to ROS messages
     cluster_msg = pcl_to_ros(cluster_cloud)
+
+
 
     # TODO: Publish ROS messages
     pcl_cluster_pub.publish(cluster_msg)
@@ -399,7 +403,7 @@ if __name__ == '__main__':
     detected_objects_pub = rospy.Publisher('/detected_objects', DetectedObjectsArray, queue_size=1)
 
     # NOTE: Change this param in accordance to the world
-    scene_num = 1
+    scene_num = 3
 
     # TODO: Load Model From disk
     model1 = pickle.load(open('model1_900_986.sav', 'rb'))
