@@ -52,10 +52,6 @@ def pcl_callback(pcl_msg):
 
 # Exercise-2 TODOs:
 
-    print 'hello'
-
-
-
     # TODO: Convert ROS msg to PCL data
 
     pcl_cloud = ros_to_pcl(pcl_msg)
