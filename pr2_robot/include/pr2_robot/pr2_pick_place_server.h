@@ -52,7 +52,7 @@ private:
   ros::ServiceClient client, grasp_client;
 
   std::vector<geometry_msgs::Pose> grasp_list;
-  bool left_success, right_success;
+  moveit::planning_interface::MoveItErrorCode left_success, right_success;
 
   const std::string LEFT_PLANNING_GROUP = "left_arm";
   const std::string RIGHT_PLANNING_GROUP = "right_arm";
@@ -95,8 +95,8 @@ private:
    * close_gripper = 0; open gripper
    *                 = 1; close gripper
    */
-  bool OperateLeftGripper(const bool &close_gripper);
-  bool OperateRightGripper(const bool &close_gripper);
+  moveit::planning_interface::MoveItErrorCode OperateLeftGripper(const bool &close_gripper);
+  moveit::planning_interface::MoveItErrorCode OperateRightGripper(const bool &close_gripper);
 
   bool SetupCollisionObject(const std::string &object_id,
                             const std::string &mesh_path,

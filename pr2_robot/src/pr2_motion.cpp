@@ -108,10 +108,10 @@ PR2Motion::PR2Motion(ros::NodeHandle nh)
 
   moveit::planning_interface::MoveGroupInterface::Plan right_arm_plan, left_arm_plan;
 
-  bool right_success = right_move_group.move();
-  bool left_success = left_move_group.move();
+  auto right_success = right_move_group.move();
+  auto left_success = left_move_group.move();
 
-  ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", (right_success & left_success) ? "" : "FAILED");
+  ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", (right_success == moveit_msgs::MoveItErrorCodes::SUCCESS & left_success == moveit_msgs::MoveItErrorCodes::SUCCESS) ? "" : "FAILED");
 
   visual_tools_ptr->prompt("next step");
 
@@ -377,7 +377,7 @@ bool PR2Motion::SetupCollisionObject(const std::string &object_id,
   collision_object.operation = collision_object.ADD;
 }
 
-bool PR2Motion::OperateRightGripper(const bool &close_gripper)
+moveit::planning_interface::MoveItErrorCode PR2Motion::OperateRightGripper(const bool &close_gripper)
 {
   // RobotState contains the current position/velocity/acceleration data
   moveit::core::RobotStatePtr gripper_current_state =
@@ -405,11 +405,11 @@ bool PR2Motion::OperateRightGripper(const bool &close_gripper)
   right_gripper_group.setJointValueTarget(gripper_joint_positions);
   ros::Duration(1.5).sleep();
 
-  bool success = right_gripper_group.move();
+  auto success = right_gripper_group.move();
   return success;
 }
 
-bool PR2Motion::OperateLeftGripper(const bool &close_gripper)
+moveit::planning_interface::MoveItErrorCode PR2Motion::OperateLeftGripper(const bool &close_gripper)
 {
   // RobotState contains the current position/velocity/acceleration data
   moveit::core::RobotStatePtr gripper_current_state =
@@ -437,7 +437,7 @@ bool PR2Motion::OperateLeftGripper(const bool &close_gripper)
   left_gripper_group.setJointValueTarget(gripper_joint_positions);
   ros::Duration(1.5).sleep();
 
-  bool success = left_gripper_group.move();
+  auto success = left_gripper_group.move();
   return success;
 }
 

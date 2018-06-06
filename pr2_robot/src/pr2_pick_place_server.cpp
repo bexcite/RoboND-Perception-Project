@@ -143,7 +143,7 @@ bool PR2PickPlace::Routine(pr2_robot::PickPlace::Request &req,
     return 1;
   }
 
-  bool success = IsPickPoseWithinLimits(req.pick_pose, act_obj_pose);
+  moveit::planning_interface::MoveItErrorCode success = IsPickPoseWithinLimits(req.pick_pose, act_obj_pose);
 
   if(!success)
   {
@@ -405,7 +405,7 @@ bool PR2PickPlace::SetupCollisionObject(const std::string &object_id,
   collision_object.operation = collision_object.ADD;
 }
 
-bool PR2PickPlace::OperateRightGripper(const bool &close_gripper)
+moveit::planning_interface::MoveItErrorCode PR2PickPlace::OperateRightGripper(const bool &close_gripper)
 {
   // RobotState contains the current position/velocity/acceleration data
   moveit::core::RobotStatePtr gripper_current_state =
@@ -433,11 +433,11 @@ bool PR2PickPlace::OperateRightGripper(const bool &close_gripper)
   right_gripper_group.setJointValueTarget(gripper_joint_positions);
   ros::Duration(1.5).sleep();
 
-  bool success = right_gripper_group.move();
+  auto success = right_gripper_group.move();
   return success;
 }
 
-bool PR2PickPlace::OperateLeftGripper(const bool &close_gripper)
+moveit::planning_interface::MoveItErrorCode PR2PickPlace::OperateLeftGripper(const bool &close_gripper)
 {
   // RobotState contains the current position/velocity/acceleration data
   moveit::core::RobotStatePtr gripper_current_state =
@@ -465,7 +465,7 @@ bool PR2PickPlace::OperateLeftGripper(const bool &close_gripper)
   left_gripper_group.setJointValueTarget(gripper_joint_positions);
   ros::Duration(1.5).sleep();
 
-  bool success = left_gripper_group.move();
+  auto success = left_gripper_group.move();
   return success;
 }
 
